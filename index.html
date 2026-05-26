@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KALATMAK® — Creative Graphic Design Studio</title>
+  <meta name="description" content="KALATMAK® is a premium creative design studio specializing in Posters, Banners, Social Media Posts, Brochures, and advanced visual communication. Fully creative designs with smooth animations and interactive 3D elements.">
+  <meta name="keywords" content="graphic design, poster design, banner design, social media post, brochure, branding, creative studio, Kalatmak">
+  <meta name="author" content="Kalatmak">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Syne:wght@700;800&family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- GSAP & Three.js CDNs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css?v=4.2">
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="custom-cursor-dot" id="cursorDot"></div>
+  <div class="custom-cursor-circle" id="cursorCircle"></div>
+
+  <!-- Preloader Screen -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-content">
+      <div class="preloader-logo">KALATMAK<span>®</span></div>
+      <div class="preloader-bar">
+        <div class="preloader-progress" id="preloaderProgress"></div>
+      </div>
+      <span class="preloader-percent" id="preloaderPercent">0%</span>
+      <p class="preloader-tagline">Loading Boundless Creativity...</p>
+    </div>
+  </div>
+
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-progress-container">
+    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+  </div>
+
+  <!-- Floating Navigation Header -->
+  <header class="navbar" id="navbar">
+    <div class="navbar-container">
+      <a href="#" class="logo"><span class="serif-initial" style="font-size: 1.1em; margin-right: -0.15em;">K</span>ALATMAK<span class="logo-accent">®</span></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#work" class="nav-link">Work</a>
+        <a href="#process" class="nav-link">Process</a>
+        <a href="#pricing" class="nav-link">Pricing</a>
+      </nav>
+      <div class="nav-right">
+        <div class="nav-actions">
+          <a href="#contact" class="btn btn-outline hover-magnetic">Get in Touch</a>
+        </div>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Toggle Navigation">
+          <span class="hamburger-line line-1"></span>
+          <span class="hamburger-line line-2"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Layout Wrapper -->
+  <main class="smooth-wrapper">
+    <div class="smooth-content">
+
+      <section class="hero" id="home">
+        <!-- Interactive Background Dot Grid -->
+        <canvas id="bgDotField"></canvas>
+
+        <!-- Sine Wave Carousel Background Container -->
+        <div class="hero-carousel-container" id="sine-carousel">
+          <div class="sine-track" id="sineTrack">
+            <div class="sine-card landscape"><img src="images/nature_mountains.png" alt="Nature mountains"></div>
+            <div class="sine-card"><img src="images/nature_forest.png" alt="Nature forest"></div>
+            <div class="sine-card landscape"><img src="images/nature_ocean.png" alt="Nature ocean"></div>
+            <div class="sine-card landscape"><img src="images/nature_desert.png" alt="Nature desert"></div>
+            <div class="sine-card"><img src="images/nature_foliage.png" alt="Nature foliage"></div>
+            <div class="sine-card"><img src="images/cyberpunk_poster.png" alt="Cyberpunk poster"></div>
+            <div class="sine-card landscape"><img src="images/tech_banner.png" alt="Tech conference banner"></div>
+            <div class="sine-card"><img src="images/social_post.png" alt="Aesthetic instagram carousel"></div>
+            <div class="sine-card"><img src="images/minimal_brochure.png" alt="Minimal brochure design"></div>
+            <div class="sine-card landscape"><img src="images/fitness_banner.png" alt="Apex fitness banner"></div>
+            <div class="sine-card"><img src="images/brand_identity.png" alt="Corporate stationery mockup"></div>
+            
+            <div class="sine-card landscape"><img src="images/nature_mountains.png" alt="Nature mountains"></div>
+            <div class="sine-card"><img src="images/nature_forest.png" alt="Nature forest"></div>
+            <div class="sine-card landscape"><img src="images/nature_ocean.png" alt="Nature ocean"></div>
+            <div class="sine-card landscape"><img src="images/nature_desert.png" alt="Nature desert"></div>
+            <div class="sine-card"><img src="images/nature_foliage.png" alt="Nature foliage"></div>
+            <div class="sine-card"><img src="images/cyberpunk_poster.png" alt="Cyberpunk poster"></div>
+            <div class="sine-card landscape"><img src="images/tech_banner.png" alt="Tech conference banner"></div>
+          </div>
+        </div>
+        
+        <div class="hero-radial-glow"></div>
+        
+        <div class="hero-content">
+          <div class="hero-content-left">
+            <div class="hero-status animate-fade-in">
+              <span class="status-dot"></span>
+              <span class="status-text">Currently Open</span>
+            </div>
+            
+            <h1 class="hero-title">
+              <span class="serif-initial">P</span>remium design expertise backed by bandwidth that doesn't break.
+            </h1>
+            
+            <p class="hero-description animate-fade-in-delayed">
+              Your dedicated design team for brand, web, email, and everything that touches design. One flat fee, unlimited requests, managed through Slack and Notion. No hiring. No freelancer roulette.
+            </p>
+            
+            <div class="hero-actions animate-fade-in-delayed">
+              <a href="#contact" class="hero-cta-link">
+                Book A Call
+                <svg class="dotted-spinner" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                  <circle cx="8" cy="8" r="6" stroke-dasharray="2 3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Brand Logo Grid Section -->
+      <section class="brands-section">
+        <div class="container brands-container">
+          <div class="brands-left">
+            <span class="section-badge">(01.5) TRUSTED BY</span>
+            <h3 class="brands-title">Aligned with industry leaders & creators.</h3>
+            <p class="brands-subtitle">We collaborate with ambitious startups and established companies to design high-concept, custom visual experiences.</p>
+          </div>
+          <div class="brands-right">
+            <div class="brands-grid">
+              <!-- Brand 1: Acme -->
+              <div class="brand-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" fill="currentColor">
+                  <path d="M24 10l6 12H18l6-12zm0-4L12 28h24L24 6z" opacity="0.9"/>
+                  <text x="48" y="26" font-family="'Outfit', sans-serif" font-weight="700" font-size="16" letter-spacing="1">ACME</text>
+                </svg>
+              </div>
+              <!-- Brand 2: Vertex -->
+              <div class="brand-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" fill="currentColor">
+                  <path d="M12 10h8v4h-8zm6 6h8v4h-8zm6 6h8v4h-8z" opacity="0.9" />
+                  <path d="M14 10l10 20L34 10H14z" opacity="0.3"/>
+                  <text x="46" y="26" font-family="'Outfit', sans-serif" font-weight="700" font-size="16" letter-spacing="1">VERTEX</text>
+                </svg>
+              </div>
+              <!-- Brand 3: Pulse -->
+              <div class="brand-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" fill="currentColor">
+                  <path d="M10 22h6l3-8 4 14 3-10 2 4h6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <text x="44" y="26" font-family="'Outfit', sans-serif" font-weight="700" font-size="16" letter-spacing="1">PULSE</text>
+                </svg>
+              </div>
+              <!-- Brand 4: Nova -->
+              <div class="brand-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" fill="currentColor">
+                  <path d="M22 10l2 7 7 2-7 2-2 7-2-7-7-2 7-2 2-7z"/>
+                  <text x="46" y="26" font-family="'Outfit', sans-serif" font-weight="700" font-size="16" letter-spacing="1">NOVA</text>
+                </svg>
+              </div>
+              <!-- Brand 5: Aero -->
+              <div class="brand-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" fill="currentColor">
+                  <path d="M12 15l16-7-8 14-8-7zm8 7l12-5-6 10-6-5z" opacity="0.9"/>
+                  <text x="48" y="26" font-family="'Outfit', sans-serif" font-weight="700" font-size="16" letter-spacing="1">AERO</text>
+                </svg>
+              </div>
+              <!-- Brand 6: Apex -->
+              <div class="brand-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" fill="currentColor">
+                  <path d="M14 28l10-18 10 18h-4l-6-11-6 11H14z"/>
+                  <text x="46" y="26" font-family="'Outfit', sans-serif" font-weight="700" font-size="16" letter-spacing="1">APEX</text>
+                </svg>
+              </div>
+              <!-- Brand 7: Orbit -->
+              <div class="brand-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" fill="currentColor">
+                  <circle cx="22" cy="20" r="6"/>
+                  <path d="M10 20c0-6.6 5.4-12 12-12s12 5.4 12 12-5.4 12-12 12-12-5.4-12-12z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 2"/>
+                  <text x="46" y="26" font-family="'Outfit', sans-serif" font-weight="700" font-size="16" letter-spacing="1">ORBIT</text>
+                </svg>
+              </div>
+              <!-- Brand 8: Zenith -->
+              <div class="brand-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" fill="currentColor">
+                  <path d="M12 10h18l-12 16h12v4H12l12-16H12v-4z"/>
+                  <text x="46" y="26" font-family="'Outfit', sans-serif" font-weight="700" font-size="16" letter-spacing="1">ZENITH</text>
+                </svg>
+              </div>
+              <!-- Brand 9: Quantum -->
+              <div class="brand-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" fill="currentColor">
+                  <circle cx="20" cy="20" r="4"/>
+                  <path d="M10 25c5-10 15-10 20 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M30 15c-5 10-15 10-20 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <text x="44" y="26" font-family="'Outfit', sans-serif" font-weight="700" font-size="16" letter-spacing="1">QUANTUM</text>
+                </svg>
+              </div>
+              <!-- Brand 10: Nexus -->
+              <div class="brand-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" fill="currentColor">
+                  <path d="M22 8l8 5v14l-8 5-8-5V13l8-5zm0 3l-5 3v8l5 3 5-3v-8l-5-3z"/>
+                  <circle cx="22" cy="20" r="2"/>
+                  <text x="46" y="26" font-family="'Outfit', sans-serif" font-weight="700" font-size="16" letter-spacing="1">NEXUS</text>
+                </svg>
+              </div>
+              <!-- Brand 11: Helix -->
+              <div class="brand-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" fill="currentColor">
+                  <path d="M12 12c4 4 4 12 8 16s8-4 12-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M12 28c4-4 4-12 8-16s8 4 12 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+                  <text x="46" y="26" font-family="'Outfit', sans-serif" font-weight="700" font-size="16" letter-spacing="1">HELIX</text>
+                </svg>
+              </div>
+              <!-- Brand 12: Satori -->
+              <div class="brand-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" fill="currentColor">
+                  <path d="M22 8c-6.6 0-12 5.4-12 12s5.4 12 12 12c3 0 6-1 8-3l-4-4c-1 1-2 2-4 2-4.4 0-8-3.6-8-8s3.6-8 8-8c2 0 3.5 1 4.5 2l4-4c-2.5-2-5.5-3-8.5-3z"/>
+                  <circle cx="22" cy="20" r="3"/>
+                  <text x="46" y="26" font-family="'Outfit', sans-serif" font-weight="700" font-size="16" letter-spacing="1">SATORI</text>
+                </svg>
+              </div>
+              <!-- Brand 13: Aether -->
+              <div class="brand-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" fill="currentColor">
+                  <path d="M22 8l10 12-10 12-10-12 10-12zm0 4.5L15.5 20 22 27.5 28.5 20 22 12.5z"/>
+                  <text x="46" y="26" font-family="'Outfit', sans-serif" font-weight="700" font-size="16" letter-spacing="1">AETHER</text>
+                </svg>
+              </div>
+              <!-- Brand 14: Specter -->
+              <div class="brand-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" fill="currentColor">
+                  <path d="M12 12h20l-4 16H16l-4-16zm6 4h8v8h-8v-8z"/>
+                  <text x="46" y="26" font-family="'Outfit', sans-serif" font-weight="700" font-size="16" letter-spacing="1">SPECTER</text>
+                </svg>
+              </div>
+              <!-- Brand 15: Vortex -->
+              <div class="brand-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" fill="currentColor">
+                  <path d="M22 10a10 10 0 000 20v-4a6 6 0 010-12v-4z" opacity="0.6"/>
+                  <path d="M22 6a14 14 0 000 28v-4a10 10 0 010-20V6z"/>
+                  <text x="46" y="26" font-family="'Outfit', sans-serif" font-weight="700" font-size="16" letter-spacing="1">VORTEX</text>
+                </svg>
+              </div>
+              <!-- Brand 16: Echo -->
+              <div class="brand-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" fill="currentColor">
+                  <rect x="10" y="16" width="3" height="8" rx="1.5"/>
+                  <rect x="16" y="12" width="3" height="16" rx="1.5"/>
+                  <rect x="22" y="8" width="3" height="24" rx="1.5"/>
+                  <rect x="28" y="12" width="3" height="16" rx="1.5"/>
+                  <rect x="34" y="16" width="3" height="8" rx="1.5"/>
+                  <text x="46" y="26" font-family="'Outfit', sans-serif" font-weight="700" font-size="16" letter-spacing="1">ECHO</text>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section class="about" id="about">
+        <div class="container grid-container">
+          <div class="about-left reveal-element">
+            <span class="section-badge">(01) WHO WE ARE</span>
+            <h2 class="section-title"><span class="serif-initial">T</span>he creative spark your brand deserves.</h2>
+          </div>
+          <div class="about-right reveal-element">
+            <p class="lead-text">
+              Kalatmak is a forward-thinking design studio. We reject boring templates, clunky layouts, and cookie-cutter graphics. We operate at the intersection of modern aesthetics, technical precision, and storytelling.
+            </p>
+            <p class="body-text">
+              Whether you need eye-catching marketing materials, conversion-focused banner packages, or editorial print brochures, we combine rich styling, glassmorphic textures, and elegant visual hierarchies to deliver designs that captivate and convert.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Editorial Benefits Section -->
+      <section class="benefits-section" id="benefits">
+        <div class="container">
+          <div class="benefits-header reveal-element">
+            <div class="benefits-header-left">
+              <h2 class="benefits-title">
+                <span class="serif-initial">N</span>ot just another design team.<br>The one you stop searching after.
+              </h2>
+              <p class="benefits-subtitle">
+                Over 12 years grinding alongside founders & agencies with a chip on their shoulder and a story that needs telling. KALATMAK is the design partner teams turn to when speed & quality matter most.
+              </p>
+            </div>
+            <div class="benefits-header-right">
+              <a href="#contact" class="benefits-link">
+                Book A Call
+                <svg class="dotted-spinner" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                  <circle cx="8" cy="8" r="6" stroke-dasharray="2 3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="benefits-grid">
+            <!-- Benefit 01 -->
+            <div class="benefit-card reveal-card">
+              <div class="benefit-num">(01)</div>
+              <div class="benefit-icon">
+                <svg viewBox="0 0 80 80" width="80" height="80" fill="none" stroke="currentColor">
+                  <defs>
+                    <radialGradient id="grad-radial-1" cx="50%" cy="50%" r="50%" fx="30%" fy="30%">
+                      <stop offset="0%" stop-color="#ffffff" />
+                      <stop offset="60%" stop-color="#a1a1aa" stop-opacity="0.6" />
+                      <stop offset="100%" stop-color="#121215" stop-opacity="0.1" />
+                    </radialGradient>
+                    <linearGradient id="grad-stroke-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4" />
+                      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.05" />
+                    </linearGradient>
+                  </defs>
+                  <circle cx="40" cy="40" r="32" stroke="url(#grad-stroke-1)" stroke-width="1.2"/>
+                  <circle cx="40" cy="40" r="28" stroke="url(#grad-stroke-1)" stroke-width="0.8" stroke-dasharray="2 2" opacity="0.6"/>
+                  <path d="M40 20 Q40 40 20 40 Q40 40 40 60 Q40 40 60 40 Q40 40 40 20 Z" fill="url(#grad-radial-1)" stroke="url(#grad-stroke-1)" stroke-width="0.5"/>
+                </svg>
+              </div>
+              <h3 class="benefit-card-title"><span class="serif-initial">T</span>he Best</h3>
+              <p class="benefit-card-desc">Every designer on our team is handpicked and vetted with 5+ years of experience. You'll never work with someone who's still figuring it out.</p>
+            </div>
+
+            <!-- Benefit 02 -->
+            <div class="benefit-card reveal-card">
+              <div class="benefit-num">(02)</div>
+              <div class="benefit-icon">
+                <svg viewBox="0 0 80 80" width="80" height="80" fill="none">
+                  <defs>
+                    <linearGradient id="grad-linear-2" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#ffffff" />
+                      <stop offset="50%" stop-color="#71717a" stop-opacity="0.7" />
+                      <stop offset="100%" stop-color="#18181b" stop-opacity="0.2" />
+                    </linearGradient>
+                    <linearGradient id="grad-stroke-2" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.3" />
+                      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.02" />
+                    </linearGradient>
+                  </defs>
+                  <g stroke="url(#grad-stroke-2)" stroke-width="1">
+                    <rect x="33" y="33" width="14" height="14" rx="4" fill="url(#grad-linear-2)" />
+                    <rect x="33" y="16" width="14" height="14" rx="4" fill="url(#grad-linear-2)" />
+                    <rect x="33" y="50" width="14" height="14" rx="4" fill="url(#grad-linear-2)" />
+                    <rect x="16" y="33" width="14" height="14" rx="4" fill="url(#grad-linear-2)" />
+                    <rect x="50" y="33" width="14" height="14" rx="4" fill="url(#grad-linear-2)" />
+                  </g>
+                </svg>
+              </div>
+              <h3 class="benefit-card-title"><span class="serif-initial">N</span>o Micromanaging</h3>
+              <p class="benefit-card-desc">No more to-do lists. We manage everything from designers to tasks, and deadlines. All done for you.</p>
+            </div>
+
+            <!-- Benefit 03 -->
+            <div class="benefit-card reveal-card">
+              <div class="benefit-num">(03)</div>
+              <div class="benefit-icon">
+                <svg viewBox="0 0 80 80" width="80" height="80" fill="none">
+                  <defs>
+                    <linearGradient id="grad-linear-3" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#ffffff" />
+                      <stop offset="50%" stop-color="#71717a" stop-opacity="0.5" />
+                      <stop offset="100%" stop-color="#18181b" stop-opacity="0.1" />
+                    </linearGradient>
+                    <linearGradient id="grad-stroke-3" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.25" />
+                      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.02" />
+                    </linearGradient>
+                  </defs>
+                  <g stroke="url(#grad-stroke-3)" stroke-width="0.8">
+                    <path d="M 18 20 L 24 20 C 30 25, 18 45, 30 60 L 24 60 C 12 45, 24 25, 18 20 Z" fill="url(#grad-linear-3)" opacity="0.4" />
+                    <path d="M 30 20 L 36 20 C 42 25, 30 45, 42 60 L 36 60 C 24 45, 36 25, 30 20 Z" fill="url(#grad-linear-3)" opacity="0.7" />
+                    <path d="M 42 20 L 48 20 C 54 25, 42 45, 54 60 L 48 60 C 36 45, 48 25, 42 20 Z" fill="url(#grad-linear-3)" opacity="1.0" />
+                  </g>
+                </svg>
+              </div>
+              <h3 class="benefit-card-title"><span class="serif-initial">L</span>ightning Fast</h3>
+              <p class="benefit-card-desc">Our designers respond and begin the task within 4 hours from it's creation & assignment in Notion.</p>
+            </div>
+
+            <!-- Benefit 04 -->
+            <div class="benefit-card reveal-card">
+              <div class="benefit-num">(04)</div>
+              <div class="benefit-icon">
+                <svg viewBox="0 0 80 80" width="80" height="80" fill="none">
+                  <defs>
+                    <radialGradient id="grad-radial-4" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stop-color="#ffffff" />
+                      <stop offset="70%" stop-color="#a1a1aa" stop-opacity="0.4" />
+                      <stop offset="100%" stop-color="#121215" stop-opacity="0.1" />
+                    </radialGradient>
+                    <linearGradient id="grad-stroke-4" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.5" />
+                      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.15" />
+                      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.02" />
+                    </linearGradient>
+                  </defs>
+                  <g stroke="url(#grad-stroke-4)" stroke-width="0.8" opacity="0.7">
+                    <line x1="12" y1="40" x2="68" y2="40" />
+                    <line x1="40" y1="12" x2="40" y2="68" />
+                    <line x1="20" y1="20" x2="60" y2="60" />
+                    <line x1="60" y1="20" x2="20" y2="60" />
+                  </g>
+                  <path d="M 40 18 L 62 40 L 40 62 L 18 40 Z" stroke="url(#grad-stroke-4)" stroke-width="1.2" />
+                  <path d="M 40 22 L 58 40 L 40 58 L 22 40 Z" stroke="url(#grad-stroke-4)" stroke-width="0.8" stroke-dasharray="2 2" opacity="0.6" />
+                  <path d="M 40 32 Q 40 40 32 40 Q 40 40 40 48 Q 40 40 48 40 Q 40 40 40 32 Z" fill="url(#grad-radial-4)" stroke="url(#grad-stroke-4)" stroke-width="0.5"/>
+                </svg>
+              </div>
+              <h3 class="benefit-card-title"><span class="serif-initial">U</span>nique & all yours</h3>
+              <p class="benefit-card-desc">Our work is always 100% original and unique. We never use clone, kits, or copy or recycle designs.</p>
+            </div>
+
+            <!-- Benefit 05 -->
+            <div class="benefit-card reveal-card">
+              <div class="benefit-num">(05)</div>
+              <div class="benefit-icon">
+                <svg viewBox="0 0 80 80" width="80" height="80" fill="none">
+                  <defs>
+                    <radialGradient id="grad-radial-5" cx="45%" cy="45%" r="60%">
+                      <stop offset="0%" stop-color="#ffffff" />
+                      <stop offset="40%" stop-color="#a1a1aa" stop-opacity="0.8" />
+                      <stop offset="75%" stop-color="#27272a" stop-opacity="0.3" />
+                      <stop offset="100%" stop-color="#09090b" stop-opacity="0.0" />
+                    </radialGradient>
+                    <linearGradient id="grad-stroke-5" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4" />
+                      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.05" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M 40 12 Q 40 40 12 40 Q 40 40 40 68 Q 40 40 68 40 Q 40 40 40 12 Z" fill="url(#grad-radial-5)" stroke="url(#grad-stroke-5)" stroke-width="0.8" />
+                </svg>
+              </div>
+              <h3 class="benefit-card-title"><span class="serif-initial">E</span>lites only</h3>
+              <p class="benefit-card-desc">All of our designers are industry experts carrying over 5+ years of experience under their belt in e-mails & websites.</p>
+            </div>
+
+            <!-- Benefit 06 -->
+            <div class="benefit-card reveal-card">
+              <div class="benefit-num">(06)</div>
+              <div class="benefit-icon">
+                <svg viewBox="0 0 80 80" width="80" height="80" fill="none">
+                  <defs>
+                    <linearGradient id="grad-linear-6" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#ffffff" />
+                      <stop offset="50%" stop-color="#71717a" stop-opacity="0.6" />
+                      <stop offset="100%" stop-color="#18181b" stop-opacity="0.15" />
+                    </linearGradient>
+                    <linearGradient id="grad-stroke-6" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4" />
+                      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.02" />
+                    </linearGradient>
+                  </defs>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M 40 12 A 28 28 0 1 0 40 68 A 28 28 0 1 0 40 12 Z M 40 24 A 16 16 0 1 1 40 56 A 16 16 0 1 1 40 24 Z" fill="url(#grad-linear-6)" stroke="url(#grad-stroke-6)" stroke-width="0.8" />
+                </svg>
+              </div>
+              <h3 class="benefit-card-title"><span class="serif-initial">R</span>eliable by default</h3>
+              <p class="benefit-card-desc">No chasing, no disappearing acts, no missed deadlines. Just dependable design support that keeps things moving.</p>
+            </div>
+
+            <!-- Benefit 07 -->
+            <div class="benefit-card reveal-card">
+              <div class="benefit-num">(07)</div>
+              <div class="benefit-icon">
+                <svg viewBox="0 0 80 80" width="80" height="80" fill="none">
+                  <defs>
+                    <linearGradient id="grad-stroke-7" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8" />
+                      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.3" />
+                      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.05" />
+                    </linearGradient>
+                  </defs>
+                  <g stroke="url(#grad-stroke-7)" stroke-width="1.0">
+                    <path d="M 22 22 Q 40 34 58 22" />
+                    <path d="M 22 58 Q 40 46 58 58" />
+                    <path d="M 22 22 Q 34 40 22 58" />
+                    <path d="M 58 22 Q 46 40 58 58" />
+                    <path d="M 24 28 Q 40 37 56 28" opacity="0.6" stroke-width="0.8" />
+                    <path d="M 24 52 Q 40 43 56 52" opacity="0.6" stroke-width="0.8" />
+                    <path d="M 28 24 Q 37 40 28 56" opacity="0.6" stroke-width="0.8" />
+                    <path d="M 52 24 Q 43 40 52 56" opacity="0.6" stroke-width="0.8" />
+                    <path d="M 26 34 Q 40 40 54 34" opacity="0.3" stroke-width="0.6" />
+                    <path d="M 26 46 Q 40 40 54 46" opacity="0.3" stroke-width="0.6" />
+                    <path d="M 34 26 Q 40 40 34 54" opacity="0.3" stroke-width="0.6" />
+                    <path d="M 46 26 Q 40 40 46 54" opacity="0.3" stroke-width="0.6" />
+                    <line x1="40" y1="20" x2="40" y2="60" opacity="0.4" stroke-width="0.8" />
+                    <line x1="20" y1="40" x2="60" y2="40" opacity="0.4" stroke-width="0.8" />
+                  </g>
+                </svg>
+              </div>
+              <h3 class="benefit-card-title"><span class="serif-initial">F</span>lexible for you</h3>
+              <p class="benefit-card-desc">You can pause or cancel anytime with our flexible subscription. No long-term commitments, direct control.</p>
+            </div>
+
+            <!-- Benefit 08 -->
+            <div class="benefit-card reveal-card">
+              <div class="benefit-num">(08)</div>
+              <div class="benefit-icon">
+                <svg viewBox="0 0 80 80" width="80" height="80" fill="none">
+                  <defs>
+                    <mask id="hatch-mask-8">
+                      <circle cx="40" cy="40" r="26" fill="#ffffff" />
+                    </mask>
+                    <linearGradient id="grad-linear-8" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#ffffff" />
+                      <stop offset="50%" stop-color="#a1a1aa" stop-opacity="0.6" />
+                      <stop offset="100%" stop-color="#18181b" stop-opacity="0.1" />
+                    </linearGradient>
+                  </defs>
+                  <circle cx="40" cy="40" r="26" stroke="url(#grad-linear-8)" stroke-width="0.8" opacity="0.4" />
+                  <g mask="url(#hatch-mask-8)">
+                    <path d="
+                      M 0 80 L 80 0 
+                      M 5 85 L 85 5 
+                      M -5 75 L 75 -5 
+                      M 10 90 L 90 10 
+                      M -10 70 L 70 -10 
+                      M 15 95 L 95 15 
+                      M -15 65 L 65 -15 
+                      M 20 100 L 100 20 
+                      M -20 60 L 60 -20 
+                      M 25 105 L 105 25 
+                      M -25 55 L 55 -25 
+                      M 30 110 L 110 30 
+                      M -30 50 L 50 -30 
+                      M 35 115 L 115 35 
+                      M -35 45 L 45 -35 
+                      M 40 120 L 120 40 
+                      M -40 40 L 40 -40 
+                      M 45 125 L 125 45 
+                      M -45 35 L 35 -35 
+                      M 50 130 L 130 50 
+                      M -50 30 L 30 -30 
+                      M 55 135 L 135 55 
+                      M -55 25 L 25 -25 
+                      M 60 140 L 140 60 
+                      M -60 20 L 20 -20 
+                      M 65 145 L 145 65 
+                      M -65 15 L 15 -15 
+                      M 70 150 L 150 70 
+                      M -70 10 L 10 -10
+                    " stroke="url(#grad-linear-8)" stroke-width="1.8" />
+                  </g>
+                </svg>
+              </div>
+              <h3 class="benefit-card-title"><span class="serif-initial">S</span>caleable & dynamic</h3>
+              <p class="benefit-card-desc">We provide additional designers ready to plug into your team on top of our base plan quickly and at a fraction of the cost.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Section -->
+      <section class="services" id="services">
+        <div class="container">
+          <div class="capabilities-grid">
+            <!-- Column 1: Brand -->
+            <div class="capability-col reveal-card">
+              <div class="col-bg-num">(01)</div>
+              <h3 class="col-title"><span class="serif-initial">B</span>rand</h3>
+              <div class="col-list">
+                <div class="col-list-item">
+                  <span class="item-num">(1.1)</span>
+                  <span class="item-text">Brand Strategy & Positioning</span>
+                </div>
+                <div class="col-list-item">
+                  <span class="item-num">(1.2)</span>
+                  <span class="item-text">Visual Identity Systems</span>
+                </div>
+                <div class="col-list-item">
+                  <span class="item-num">(1.3)</span>
+                  <span class="item-text">Campaign Art Direction</span>
+                </div>
+                <div class="col-list-item">
+                  <span class="item-num">(1.4)</span>
+                  <span class="item-text">Brand Guidelines</span>
+                </div>
+                <div class="col-list-item">
+                  <span class="item-num">(1.5)</span>
+                  <span class="item-text">Packaging Design</span>
+                </div>
+                <div class="col-list-item">
+                  <span class="item-num">(1.6)</span>
+                  <span class="item-text">Print & Editorial</span>
+                </div>
+                <div class="col-list-item">
+                  <span class="item-num">(1.7)</span>
+                  <span class="item-text">Custom Illustration</span>
+                </div>
+                <div class="col-list-item">
+                  <span class="item-num">(1.8)</span>
+                  <span class="item-text">Typography & Lettering</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column 2: Digital -->
+            <div class="capability-col reveal-card">
+              <div class="col-bg-num">(02)</div>
+              <h3 class="col-title"><span class="serif-initial">D</span>igital</h3>
+              <div class="col-list">
+                <div class="col-list-item">
+                  <span class="item-num">(2.1)</span>
+                  <span class="item-text">Web Design</span>
+                </div>
+                <div class="col-list-item">
+                  <span class="item-num">(2.2)</span>
+                  <span class="item-text">Web Development</span>
+                </div>
+                <div class="col-list-item">
+                  <span class="item-num">(2.3)</span>
+                  <span class="item-text">Mobile Apps</span>
+                </div>
+                <div class="col-list-item">
+                  <span class="item-num">(2.4)</span>
+                  <span class="item-text">Generative AI</span>
+                </div>
+                <div class="col-list-item">
+                  <span class="item-num">(2.5)</span>
+                  <span class="item-text">UI & UX Design</span>
+                </div>
+                <div class="col-list-item">
+                  <span class="item-num">(2.6)</span>
+                  <span class="item-text">App Design</span>
+                </div>
+                <div class="col-list-item">
+                  <span class="item-num">(2.7)</span>
+                  <span class="item-text">Product Design</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column 3: Marketing -->
+            <div class="capability-col reveal-card">
+              <div class="col-bg-num">(03)</div>
+              <h3 class="col-title"><span class="serif-initial">M</span>arketing</h3>
+              <div class="col-list">
+                <div class="col-list-item">
+                  <span class="item-num">(3.1)</span>
+                  <span class="item-text">Conversion Rate Optimization</span>
+                </div>
+                <div class="col-list-item">
+                  <span class="item-num">(3.2)</span>
+                  <span class="item-text">Email & SMS Design</span>
+                </div>
+                <div class="col-list-item">
+                  <span class="item-num">(3.3)</span>
+                  <span class="item-text">Ad Creatives Design</span>
+                </div>
+                <div class="col-list-item">
+                  <span class="item-num">(3.4)</span>
+                  <span class="item-text">Generative AI</span>
+                </div>
+                <div class="col-list-item">
+                  <span class="item-num">(3.5)</span>
+                  <span class="item-text">Strategy & Consultation</span>
+                </div>
+                <div class="col-list-item">
+                  <span class="item-num">(3.6)</span>
+                  <span class="item-text">Campaigns Strategy</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Work / Portfolio Section -->
+      <section class="work" id="work">
+        <div class="container">
+          <div class="section-header-flex">
+            <div class="section-header-left">
+              <span class="section-badge">(03) PORTFOLIO</span>
+              <h2 class="section-title"><span class="serif-initial">S</span>elected Masterpieces</h2>
+            </div>
+            
+            <div class="portfolio-tabs">
+              <button class="tab-btn active" data-filter="all">All</button>
+              <button class="tab-btn" data-filter="poster">Posters</button>
+              <button class="tab-btn" data-filter="banner">Banners</button>
+              <button class="tab-btn" data-filter="social">Social Media</button>
+              <button class="tab-btn" data-filter="brochure">Brochures</button>
+            </div>
+          </div>
+
+          <div class="portfolio-grid" id="portfolioGrid">
+            <!-- Portfolio Item 1 (Poster) -->
+            <div class="portfolio-item reveal-item" data-category="poster">
+              <div class="item-inner">
+                <div class="item-img-container">
+                  <img src="images/cyberpunk_poster.png" alt="Cyberpunk Poster Design" class="portfolio-img">
+                  <div class="item-overlay">
+                    <span class="item-tag">Poster Design</span>
+                  </div>
+                </div>
+                <div class="item-info">
+                  <h4 class="item-title">Neo-Tokyo Cyberpunk Poster</h4>
+                  <p class="item-subtitle">High contrast neon key visual & typography</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Portfolio Item 2 (Banner) -->
+            <div class="portfolio-item reveal-item" data-category="banner">
+              <div class="item-inner">
+                <div class="item-img-container">
+                  <img src="images/tech_banner.png" alt="Tech Conference Banner" class="portfolio-img">
+                  <div class="item-overlay">
+                    <span class="item-tag">Banner Design</span>
+                  </div>
+                </div>
+                <div class="item-info">
+                  <h4 class="item-title">NextGen Tech Summit Banner</h4>
+                  <p class="item-subtitle">Glassmorphic display layout & glowing shapes</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Portfolio Item 3 (Social) -->
+            <div class="portfolio-item reveal-item" data-category="social">
+              <div class="item-inner">
+                <div class="item-img-container">
+                  <img src="images/social_post.png" alt="Social Media Branding" class="portfolio-img">
+                  <div class="item-overlay">
+                    <span class="item-tag">Social Media</span>
+                  </div>
+                </div>
+                <div class="item-info">
+                  <h4 class="item-title">Aesthetic Instagram Carousel</h4>
+                  <p class="item-subtitle">Gradient theme & elegant editorial serif quotes</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Portfolio Item 4 (Brochure) -->
+            <div class="portfolio-item reveal-item" data-category="brochure">
+              <div class="item-inner">
+                <div class="item-img-container">
+                  <img src="images/minimal_brochure.png" alt="Minimalist Brochure" class="portfolio-img">
+                  <div class="item-overlay">
+                    <span class="item-tag">Brochure</span>
+                  </div>
+                </div>
+                <div class="item-info">
+                  <h4 class="item-title">Arch-Studio Editorial Spread</h4>
+                  <p class="item-subtitle">Minimal grid layouts & clean typography margins</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Portfolio Item 5 (Banner) -->
+            <div class="portfolio-item reveal-item" data-category="banner">
+              <div class="item-inner">
+                <div class="item-img-container">
+                  <img src="images/fitness_banner.png" alt="Fitness Banner" class="portfolio-img">
+                  <div class="item-overlay">
+                    <span class="item-tag">Banner Design</span>
+                  </div>
+                </div>
+                <div class="item-info">
+                  <h4 class="item-title">Apex Fitness Advertising Graphics</h4>
+                  <p class="item-subtitle">Dynamic motion overlays & sport typography</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Portfolio Item 6 (Social/Branding) -->
+            <div class="portfolio-item reveal-item" data-category="social">
+              <div class="item-inner">
+                <div class="item-img-container">
+                  <img src="images/brand_identity.png" alt="Corporate Branding stationery" class="portfolio-img">
+                  <div class="item-overlay">
+                    <span class="item-tag">Brand Identity</span>
+                  </div>
+                </div>
+                <div class="item-info">
+                  <h4 class="item-title">Corporate Stationery Mockup</h4>
+                  <p class="item-subtitle">Minimal cards, letterheads & stationery layout</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Process Section -->
+      <section class="process" id="process">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-badge">(04) PROCESS</span>
+            <h2 class="section-title"><span class="serif-initial">H</span>ow We Collaborate</h2>
+          </div>
+
+          <div class="process-grid">
+            <!-- Step 1 -->
+            <div class="process-card reveal-card">
+              <span class="process-num">01</span>
+              <h3 class="process-title"><span class="serif-initial">B</span>riefing & Strategy</h3>
+              <p class="process-desc">
+                We kickoff by understanding your brand vision, target audience, and content requirements. We define the styling guidelines, color directions, and canvas rules.
+              </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="process-card reveal-card">
+              <span class="process-num">02</span>
+              <h3 class="process-title"><span class="serif-initial">C</span>reative Execution</h3>
+              <p class="process-desc">
+                Our design team crafts bespoke layouts using high-end illustrations, 3D accents, and custom typographies. We present initial revisions within days.
+              </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="process-card reveal-card">
+              <span class="process-num">03</span>
+              <h3 class="process-title"><span class="serif-initial">R</span>efinement & Feedback</h3>
+              <p class="process-desc">
+                We iterate closely with you. Utilizing direct feedback loops, we adjust typography weights, crop guidelines, and spacing ratios to perfection.
+              </p>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="process-card reveal-card">
+              <span class="process-num">04</span>
+              <h3 class="process-title"><span class="serif-initial">F</span>inal Hand-off</h3>
+              <p class="process-desc">
+                You receive high-resolution vector and raster assets, fully layered design files, and exact spec guidelines optimized for both digital and print delivery.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pricing / Packages Section -->
+      <section class="pricing" id="pricing">
+        <div class="container">
+          <div class="section-header-flex">
+            <div class="section-header-left">
+              <span class="section-badge">(05) PLANS</span>
+              <h2 class="section-title"><span class="serif-initial">T</span>ransparent Pricing</h2>
+            </div>
+            
+            <div class="pricing-toggle-wrap">
+              <span class="toggle-label active" id="labelMonthly">Project Based</span>
+              <div class="pricing-toggle" id="pricingToggle">
+                <span class="toggle-slider"></span>
+              </div>
+              <span class="toggle-label" id="labelSubscription">Monthly Studio Retainer</span>
+            </div>
+          </div>
+
+          <div class="pricing-grid" id="pricingGrid">
+            <!-- Plan 1 -->
+            <div class="pricing-card reveal-card" data-monthly-price="$199" data-sub-price="$899">
+              <div class="pricing-header">
+                <h3 class="plan-name"><span class="serif-initial">S</span>tarter Graphic Pack</h3>
+                <p class="plan-subtitle">Ideal for singular events or small social updates</p>
+                <div class="plan-price"><span class="price-val">$199</span><span class="price-period">/project</span></div>
+              </div>
+              <hr class="plan-divider">
+              <ul class="plan-features">
+                <li><i data-lucide="check"></i> 1 Poster or Banner design</li>
+                <li><i data-lucide="check"></i> Layered source files (PSD/Figma)</li>
+                <li><i data-lucide="check"></i> 2 rounds of revision</li>
+                <li><i data-lucide="check"></i> Delivery within 3 working days</li>
+                <li class="disabled"><i data-lucide="x"></i> Dedicated Account Slack Channel</li>
+                <li class="disabled"><i data-lucide="x"></i> Unlimited active requests</li>
+              </ul>
+              <a href="#contact" class="btn btn-outline hover-magnetic plan-btn">Get Started</a>
+            </div>
+
+            <!-- Plan 2 (Popular) -->
+            <div class="pricing-card popular reveal-card" data-monthly-price="$499" data-sub-price="$1,990">
+              <span class="popular-badge">Highly Recommended</span>
+              <div class="pricing-header">
+                <h3 class="plan-name"><span class="serif-initial">C</span>reative Studio Pro</h3>
+                <p class="plan-subtitle">Perfect for brands running steady campaigns</p>
+                <div class="plan-price"><span class="price-val">$499</span><span class="price-period">/project</span></div>
+              </div>
+              <hr class="plan-divider">
+              <ul class="plan-features">
+                <li><i data-lucide="check"></i> Up to 4 custom assets (Posters/Banners)</li>
+                <li><i data-lucide="check"></i> Includes Brochure layout (Up to 8 pages)</li>
+                <li><i data-lucide="check"></i> Unlimited revision cycles</li>
+                <li><i data-lucide="check"></i> Priority delivery (2 working days)</li>
+                <li><i data-lucide="check"></i> Full print-ready specifications</li>
+                <li class="disabled" data-sub-only><i data-lucide="x"></i> Dedicated Slack & Notion Portal</li>
+              </ul>
+              <a href="#contact" class="btn btn-primary hover-magnetic plan-btn">Get Started</a>
+            </div>
+
+            <!-- Plan 3 -->
+            <div class="pricing-card reveal-card" data-monthly-price="$890" data-sub-price="$3,490">
+              <div class="pricing-header">
+                <h3 class="plan-name"><span class="serif-initial">E</span>nterprise Suite</h3>
+                <p class="plan-subtitle">Complete design bandwidth for expanding studios</p>
+                <div class="plan-price"><span class="price-val">$890</span><span class="price-period">/project</span></div>
+              </div>
+              <hr class="plan-divider">
+              <ul class="plan-features">
+                <li><i data-lucide="check"></i> Unlimited graphic designs & booklets</li>
+                <li><i data-lucide="check"></i> Custom 3D elements & textures</li>
+                <li><i data-lucide="check"></i> Next-day priority delivery</li>
+                <li><i data-lucide="check"></i> Direct designer contact channel</li>
+                <li><i data-lucide="check"></i> Dedicated Slack & Notion Workspace</li>
+                <li><i data-lucide="check"></i> Commercial use license included</li>
+              </ul>
+              <a href="#contact" class="btn btn-outline hover-magnetic plan-btn">Get Started</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact/Consultation Section -->
+      <section class="contact" id="contact">
+        <div class="container grid-container">
+          <div class="contact-left reveal-element">
+            <span class="section-badge">(06) INQUIRY</span>
+            <h2 class="section-title"><span class="serif-initial">L</span>et’s build something breathtaking.</h2>
+            <p class="contact-desc">
+              Ready to elevate your poster, banner, and social media aesthetic? Send us your brief, and let's craft visual magic together.
+            </p>
+            <div class="contact-info-list">
+              <div class="contact-info-item">
+                <i data-lucide="mail"></i>
+                <div>
+                  <h4>Email Us</h4>
+                  <a href="mailto:hello@kalatmak.studio" class="hover-glow">hello@kalatmak.studio</a>
+                </div>
+              </div>
+              <div class="contact-info-item">
+                <i data-lucide="map-pin"></i>
+                <div>
+                  <h4>Location</h4>
+                  <span>New Delhi, India (Serving Globally)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-right reveal-element">
+            <form class="contact-form" id="contactForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <input type="text" id="name" required placeholder=" ">
+                  <label for="name">Your Name</label>
+                </div>
+                <div class="form-group">
+                  <input type="email" id="email" required placeholder=" ">
+                  <label for="email">Email Address</label>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <select id="project-type" required>
+                  <option value="" disabled selected hidden></option>
+                  <option value="poster">Poster Design</option>
+                  <option value="banner">Advertising Banner</option>
+                  <option value="social">Social Media Package</option>
+                  <option value="brochure">Brochure/Catalog Design</option>
+                  <option value="branding">Complete Identity Plan</option>
+                </select>
+                <label for="project-type" class="select-label">What do you need designed?</label>
+              </div>
+
+              <div class="form-group">
+                <textarea id="message" rows="5" required placeholder=" "></textarea>
+                <label for="message">Tell us about your project brief...</label>
+              </div>
+
+              <button type="submit" class="btn btn-primary hover-magnetic w-full">
+                Send Inquiry <i data-lucide="send"></i>
+              </button>
+              
+              <div class="form-response" id="formResponse"></div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer Section -->
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-top">
+            <div class="footer-brand">
+              <a href="#" class="logo"><span class="serif-initial" style="font-size: 1.15em; margin-right: -0.15em;">K</span>ALATMAK<span>®</span></a>
+              <p class="footer-tag">Modern Graphic Aesthetics & 3D Creations</p>
+            </div>
+            <div class="footer-links-grid">
+              <div class="footer-col">
+                <h4>Navigation</h4>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#work">Work</a>
+                <a href="#pricing">Plans</a>
+              </div>
+              <div class="footer-col">
+                <h4>Capabilities</h4>
+                <a href="#services">Posters</a>
+                <a href="#services">Banners</a>
+                <a href="#services">Social Media</a>
+                <a href="#services">Brochures</a>
+              </div>
+              <div class="footer-col">
+                <h4>Socials</h4>
+                <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://dribbble.com" target="_blank" rel="noopener">Dribbble</a>
+                <a href="https://behance.net" target="_blank" rel="noopener">Behance</a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          <hr class="footer-divider">
+          <div class="footer-bottom">
+            <span class="copyright">© 2026 KALATMAK Studio. All Rights Reserved.</span>
+            <span class="back-to-top" id="backToTop">Back to Top <i data-lucide="arrow-up"></i></span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  </main>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-modal" id="lightboxModal">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close Lightbox"><i data-lucide="x"></i></button>
+    <div class="lightbox-content">
+      <img src="" alt="Zoomed view" id="lightboxImage">
+      <p class="lightbox-caption" id="lightboxCaption"></p>
+    </div>
+  </div>
+
+  <!-- Custom Script -->
+  <script src="js/main.js?v=4.2"></script>
+</body>
+</html>
