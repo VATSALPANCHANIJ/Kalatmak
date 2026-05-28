@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KALATMAK® — Creative Journal</title>
+  <meta name="description" content="Read design case studies, typography columns, and brand strategy guides from the KALATMAK Creative Studio.">
+  <meta name="author" content="Kalatmak">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Syne:wght@700;800&family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- EmailJS Browser SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <!-- GSAP & ScrollTrigger CDNs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css?v=3.8">
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="custom-cursor-dot" id="cursorDot"></div>
+  <div class="custom-cursor-circle" id="cursorCircle"></div>
+
+  <!-- Preloader Screen -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-content">
+      <div class="preloader-logo"><img src="images/logo.png" alt="KALATMAK®" class="preloader-logo-img"></div>
+      <div class="preloader-bar">
+        <div class="preloader-progress" id="preloaderProgress"></div>
+      </div>
+      <span class="preloader-percent" id="preloaderPercent">0%</span>
+      <p class="preloader-tagline">Loading Creative Journal...</p>
+    </div>
+  </div>
+
+  <!-- Interactive Background Dot Grid -->
+  <canvas id="bgDotField"></canvas>
+
+  <!-- Floating Navigation Header -->
+  <header class="navbar" id="navbar" style="top: 0; opacity: 1;">
+    <div class="navbar-container">
+      <a href="index.html" class="logo"><img src="images/logo.png" alt="KALATMAK®" class="logo-img"></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#services" class="nav-link">Services</a>
+        <a href="index.html#work" class="nav-link">Work</a>
+        <a href="index.html#process" class="nav-link">Process</a>
+        <a href="index.html#pricing" class="nav-link">Pricing</a>
+        <a href="blog.html" class="nav-link active">Blog</a>
+        <a href="blog.html#contact" class="nav-link nav-mobile-only">Get in Touch</a>
+      </nav>
+      <div class="nav-right">
+        <div class="nav-actions">
+          <a href="blog.html#contact" class="btn btn-outline hover-magnetic">Get in Touch</a>
+        </div>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Toggle Navigation">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Layout Wrapper -->
+  <main class="smooth-wrapper" style="margin-top: 80px;">
+    <div class="smooth-content">
+
+      <!-- Blog Hero Section -->
+      <section class="blog-hero">
+        <div class="container">
+          <i data-lucide="sparkle" class="sparkle-icon"></i>
+          <h1 class="blog-hero-title">Journal</h1>
+          <p class="blog-hero-desc">
+            Thoughts, studies, and stories behind modern graphic design, brand continuity, and interactive web aesthetics.
+          </p>
+        </div>
+      </section>
+
+      <!-- Blog Posts Grid Section -->
+      <section class="blog-section">
+        <div class="container">
+          <div class="blog-grid" id="blogGrid">
+            <!-- Skeleton items loaded dynamically by js/blog.js -->
+            <div class="blog-card" style="min-height: 400px; background-color: var(--bg-secondary); border: 1px solid rgba(255,255,255,0.05);"></div>
+            <div class="blog-card" style="min-height: 400px; background-color: var(--bg-secondary); border: 1px solid rgba(255,255,255,0.05);"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact/Consultation Section -->
+      <section class="contact" id="contact">
+        <div class="container grid-container">
+          <div class="contact-left reveal-element">
+            <span class="section-badge">(06) INQUIRY</span>
+            <h2 class="section-title"><span class="serif-initial">L</span>et’s build something breathtaking.</h2>
+            <p class="contact-desc">
+              Ready to elevate your poster, banner, and social media aesthetic? Send us your brief, and let's craft visual magic together.
+            </p>
+            <div class="contact-info-list">
+              <div class="contact-info-item">
+                <i data-lucide="mail"></i>
+                <div>
+                  <h4>Email Us</h4>
+                  <a href="mailto:info4kalatmak@gmail.com" class="hover-glow">info4kalatmak@gmail.com</a>
+                </div>
+              </div>
+              <div class="contact-info-item">
+                <i data-lucide="phone"></i>
+                <div>
+                  <h4>Call Us</h4>
+                  <a href="tel:+918980081500" class="hover-glow">+91 89800 81500</a>
+                </div>
+              </div>
+              <div class="contact-info-item">
+                <i data-lucide="map-pin"></i>
+                <div>
+                  <h4>Location</h4>
+                  <span>Mysore Road, Bangalore</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-right reveal-element">
+            <form class="contact-form" id="contactForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <input type="text" id="name" name="name" required placeholder=" ">
+                  <label for="name">Your Name</label>
+                </div>
+                <div class="form-group">
+                  <input type="email" id="email" name="email" required placeholder=" ">
+                  <label for="email">Email Address</label>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <select id="project-type" name="project-type" required>
+                  <option value="" disabled selected hidden></option>
+                  <option value="Poster Design">Poster Design</option>
+                  <option value="Advertising Banner">Advertising Banner</option>
+                  <option value="Social Media Package">Social Media Package</option>
+                  <option value="Brochure/Catalog Design">Brochure/Catalog Design</option>
+                  <option value="Complete Identity Plan">Complete Identity Plan</option>
+                </select>
+                <label for="project-type" class="select-label">What do you need designed?</label>
+              </div>
+
+              <div class="form-group">
+                <textarea id="message" name="message" rows="5" required placeholder=" "></textarea>
+                <label for="message">Tell us about your project brief...</label>
+              </div>
+
+              <button type="submit" class="btn btn-primary hover-magnetic w-full">
+                Send Inquiry <i data-lucide="send"></i>
+              </button>
+              
+              <div class="form-response" id="formResponse"></div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer Section -->
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-top">
+            <div class="footer-brand">
+              <a href="index.html" class="logo"><img src="images/logo.png" alt="KALATMAK®" class="logo-img" loading="lazy"></a>
+              <p class="footer-tag">Modern Graphic Aesthetics & 3D Creations</p>
+            </div>
+            <div class="footer-links-grid">
+              <div class="footer-col">
+                <h4>Navigation</h4>
+                <a href="index.html#about">About</a>
+                <a href="index.html#services">Services</a>
+                <a href="index.html#work">Work</a>
+                <a href="index.html#pricing">Plans</a>
+                <a href="blog.html">Blog</a>
+              </div>
+              <div class="footer-col">
+                <h4>Capabilities</h4>
+                <a href="index.html#services">Posters</a>
+                <a href="index.html#services">Banners</a>
+                <a href="index.html#services">Social Media</a>
+                <a href="index.html#services">Brochures</a>
+              </div>
+              <div class="footer-col">
+                <h4>Socials</h4>
+                <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://dribbble.com" target="_blank" rel="noopener">Dribbble</a>
+                <a href="https://behance.net" target="_blank" rel="noopener">Behance</a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          <hr class="footer-divider">
+          <div class="footer-bottom">
+            <span class="copyright">© 2026 KALATMAK Studio. All Rights Reserved.</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  </main>
+
+  <!-- Fullscreen Blog Post Reading Modal Overlay -->
+  <div class="blog-modal" id="blogReaderModal">
+    <button class="blog-modal-close" id="modalCloseBtn" aria-label="Close Article">
+      <i data-lucide="x"></i>
+    </button>
+    <div class="blog-modal-container" id="modalContentInject">
+      <!-- Generated dynamically by js/blog.js -->
+    </div>
+  </div>
+
+  <!-- Custom Script -->
+  <script src="js/blog.js?v=3.8"></script>
+</body>
+</html>
