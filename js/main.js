@@ -74,24 +74,48 @@ document.addEventListener('DOMContentLoaded', () => {
   let mouseY = 0;
   let circleX = 0;
   let circleY = 0;
+  let isMobileOrTablet = window.innerWidth < 992;
+
+  window.addEventListener('resize', () => {
+    isMobileOrTablet = window.innerWidth < 992;
+    if (isMobileOrTablet) {
+      if (cursorDot) cursorDot.style.display = 'none';
+      if (cursorCircle) cursorCircle.style.display = 'none';
+    } else {
+      if (cursorDot) cursorDot.style.display = 'block';
+      if (cursorCircle) cursorCircle.style.display = 'block';
+    }
+  });
+
+  // Hide initially on load if mobile or tablet
+  if (isMobileOrTablet) {
+    if (cursorDot) cursorDot.style.display = 'none';
+    if (cursorCircle) cursorCircle.style.display = 'none';
+  }
   
   document.addEventListener('mousemove', (e) => {
+    if (isMobileOrTablet) return;
+    
     mouseX = e.clientX;
     mouseY = e.clientY;
     
     // Immediate cursor dot position
-    cursorDot.style.left = `${mouseX}px`;
-    cursorDot.style.top = `${mouseY}px`;
+    if (cursorDot) {
+      cursorDot.style.left = `${mouseX}px`;
+      cursorDot.style.top = `${mouseY}px`;
+    }
   });
 
   // Smooth damping animation for the cursor circle
   function animateCursor() {
-    const damping = 0.15;
-    circleX += (mouseX - circleX) * damping;
-    circleY += (mouseY - circleY) * damping;
-    
-    cursorCircle.style.left = `${circleX}px`;
-    cursorCircle.style.top = `${circleY}px`;
+    if (!isMobileOrTablet && cursorCircle) {
+      const damping = 0.15;
+      circleX += (mouseX - circleX) * damping;
+      circleY += (mouseY - circleY) * damping;
+      
+      cursorCircle.style.left = `${circleX}px`;
+      cursorCircle.style.top = `${circleY}px`;
+    }
     
     requestAnimationFrame(animateCursor);
   }
@@ -101,10 +125,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const hoverElements = document.querySelectorAll('a, button, input, select, textarea, .tab-btn, .pricing-toggle');
   hoverElements.forEach(el => {
     el.addEventListener('mouseenter', () => {
+      if (isMobileOrTablet) return;
       document.body.classList.add('hovering-link');
     });
     el.addEventListener('mouseleave', () => {
-      document.body.classList.add('hovering-link');
+      if (isMobileOrTablet) return;
       document.body.classList.remove('hovering-link');
     });
   });
@@ -904,8 +929,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function resizeBgCanvas() {
       width = window.innerWidth;
-      const heroContainer = document.getElementById('home');
-      height = heroContainer ? heroContainer.clientHeight : window.innerHeight;
+      height = window.innerHeight;
       bgDotCanvas.width = width;
       bgDotCanvas.height = height;
       

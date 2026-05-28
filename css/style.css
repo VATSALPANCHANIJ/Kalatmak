@@ -19,30 +19,32 @@
   --text-primary: #fafafa;
   --text-secondary: #a1a1aa;
   --text-muted: #52525b;
-  
+
   --accent-indigo: #5850ec;
   --accent-magenta: #d946ef;
   --accent-glow: rgba(88, 80, 236, 0.15);
   --accent-border-glow: rgba(217, 70, 239, 0.4);
-  
+
   --font-heading: 'Syne', sans-serif;
   --font-body: 'Outfit', sans-serif;
-  
+
   --transition-fast: 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
   --transition-normal: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   --transition-slow: 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
-  
+
   --cursor-size: 24px;
   --container-max-width: 1200px;
   --border-radius-sm: 8px;
   --border-radius-md: 16px;
   --border-radius-lg: 24px;
-  
+
   --grid-line-color: rgba(255, 255, 255, 0.03);
 }
 
 /* --- Base Resets & Global Styles --- */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -66,18 +68,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Faint Background Grid Pattern & Noise Overlay */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: 
-    linear-gradient(to right, var(--grid-line-color) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--grid-line-color) 1px, transparent 1px);
-  background-size: 80px 80px;
-  z-index: 1;
-  pointer-events: none;
-}
+/* Faint Background Noise Overlay */
 
 body::after {
   content: "";
@@ -124,6 +115,13 @@ body.hovering-link .custom-cursor-circle {
   height: 48px;
   border-color: var(--accent-magenta);
   background-color: rgba(217, 70, 239, 0.1);
+}
+
+@media (max-width: 991px) {
+  .custom-cursor-dot,
+  .custom-cursor-circle {
+    display: none !important;
+  }
 }
 
 /* --- Preloader --- */
@@ -206,7 +204,10 @@ body.hovering-link .custom-cursor-circle {
 }
 
 /* --- Typography --- */
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   font-family: var(--font-heading);
   font-weight: 800;
   line-height: 1.1;
@@ -311,7 +312,8 @@ p {
   left: 0;
   width: 100%;
   padding: 1.5rem 0;
-  z-index: 1002; /* Ensure navbar sits above fullscreen mobile overlays */
+  z-index: 1002;
+  /* Ensure navbar sits above fullscreen mobile overlays */
   transition: var(--transition-normal);
 }
 
@@ -347,7 +349,8 @@ p {
   color: var(--text-primary);
   letter-spacing: -0.5px;
   position: relative;
-  z-index: 1005; /* Keep logo floating on top of mobile menu */
+  z-index: 1005;
+  /* Keep logo floating on top of mobile menu */
   display: flex;
   align-items: center;
 }
@@ -413,7 +416,8 @@ p {
   align-items: center;
   gap: 1.5rem;
   position: relative;
-  z-index: 1005; /* Keep actions / close button floating on top of mobile menu */
+  z-index: 1005;
+  /* Keep actions / close button floating on top of mobile menu */
 }
 
 .nav-actions {
@@ -427,7 +431,7 @@ p {
 }
 
 /* Hide "Get in Touch" action button when mobile overlay menu is active */
-.nav-links.mobile-active ~ .nav-right .nav-actions {
+.nav-links.mobile-active~.nav-right .nav-actions {
   display: none !important;
 }
 
@@ -436,9 +440,12 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 44px; /* Touch target dimensions */
-  height: 44px; /* Touch target dimensions */
-  padding: 13px 10px; /* Padding creates larger tap target while visual lines remain 24x18px */
+  width: 44px;
+  /* Touch target dimensions */
+  height: 44px;
+  /* Touch target dimensions */
+  padding: 13px 10px;
+  /* Padding creates larger tap target while visual lines remain 24x18px */
   box-sizing: border-box;
   background: transparent;
   border: none;
@@ -448,7 +455,8 @@ p {
 
 @media(max-width: 991px) {
   .logo {
-    font-size: 1.25rem; /* Decrease logo scale on mobile to avoid overcrowding */
+    font-size: 1.25rem;
+    /* Decrease logo scale on mobile to avoid overcrowding */
   }
 }
 
@@ -534,14 +542,16 @@ p {
 
 .hero-carousel-container {
   position: absolute;
-  top: 100px; /* clear floating navbar spacing */
+  top: 100px;
+  /* clear floating navbar spacing */
   left: 0;
   width: 100vw;
   height: 600px;
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
   z-index: 10;
-  overflow: visible; /* let diagonal slant cards cascade smoothly */
+  overflow: visible;
+  /* let diagonal slant cards cascade smoothly */
   pointer-events: auto;
 }
 
@@ -557,9 +567,12 @@ p {
 
 .sine-card {
   position: absolute;
-  width: 290px; /* Increased card width on desktop */
-  height: 390px; /* Increased card height on desktop */
-  border-radius: 0; /* Removed border-radius for sharp-cornered style */
+  width: 290px;
+  /* Increased card width on desktop */
+  height: 390px;
+  /* Increased card height on desktop */
+  border-radius: 0;
+  /* Removed border-radius for sharp-cornered style */
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
@@ -591,6 +604,7 @@ p {
     width: 170px;
     height: 230px;
   }
+
   .sine-card.landscape {
     width: 230px;
     height: 170px;
@@ -607,7 +621,7 @@ p {
 
 @media (max-width: 991px) {
   .hero-grid-overlay {
-    background: radial-gradient(circle at 50% 50%, rgba(9,9,11,0.5) 0%, var(--bg-primary) 90%);
+    background: radial-gradient(circle at 50% 50%, rgba(9, 9, 11, 0.5) 0%, var(--bg-primary) 90%);
   }
 }
 
@@ -617,17 +631,17 @@ p {
   right: 15%;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(88,80,236,0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(88, 80, 236, 0.1) 0%, transparent 70%);
   filter: blur(60px);
   z-index: 2;
   pointer-events: none;
 }
 
 #bgDotField {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   z-index: 1;
   pointer-events: none;
 }
@@ -654,7 +668,8 @@ p {
 }
 
 .hero-content-right {
-  display: none !important; /* Hide particle orb container per reference design mix */
+  display: none !important;
+  /* Hide particle orb container per reference design mix */
 }
 
 .hero-status {
@@ -681,14 +696,27 @@ p {
 }
 
 @keyframes pulse-glow {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
 }
 
 .hero-title {
-  font-family: var(--font-body); /* Outfit, sans-serif */
-  font-weight: 300; /* Clean light/medium weight humanist sans-serif */
+  font-family: var(--font-body);
+  /* Outfit, sans-serif */
+  font-weight: 300;
+  /* Clean light/medium weight humanist sans-serif */
   font-size: 2.25rem;
   line-height: 1.25;
   letter-spacing: -0.5px;
@@ -699,6 +727,12 @@ p {
 @media(min-width: 768px) {
   .hero-title {
     font-size: 2.6rem;
+  }
+}
+
+@media (max-width:1080px) {
+  .hero-content-left {
+    width: 100%;
   }
 }
 
@@ -742,7 +776,7 @@ p {
     padding-top: 7rem;
     padding-bottom: 4rem;
   }
-  
+
   .hero-carousel-container {
     position: relative;
     top: 0;
@@ -750,7 +784,7 @@ p {
     margin-bottom: 2.5rem;
     width: 100vw;
   }
-  
+
   .hero-content {
     position: relative;
     bottom: 0;
@@ -763,7 +797,7 @@ p {
     gap: 1.5rem;
     pointer-events: auto;
   }
-  
+
   .hero-title {
     font-size: 2.2rem;
   }
@@ -787,7 +821,8 @@ p {
 
 @media(min-width: 992px) {
   .brands-container {
-    grid-template-columns: 3.2fr 6.8fr; /* 32% / 68% split for premium layout */
+    grid-template-columns: 3.2fr 6.8fr;
+    /* 32% / 68% split for premium layout */
     gap: 4rem;
     align-items: center;
   }
@@ -838,14 +873,16 @@ p {
 
 @media(min-width: 1200px) {
   .brands-grid {
-    grid-template-columns: repeat(4, 1fr); /* 4 columns on desktop for 16 logos */
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 columns on desktop for 16 logos */
     gap: 2rem;
   }
 }
 
 .brand-item {
   width: 100%;
-  max-width: 180px; /* Medium size layout */
+  max-width: 180px;
+  /* Medium size layout */
   height: 60px;
   display: flex;
   justify-content: center;
@@ -863,7 +900,8 @@ p {
 .brand-item svg {
   width: 100%;
   height: 100%;
-  max-height: 38px; /* Medium visual height */
+  max-height: 38px;
+  /* Medium visual height */
 }
 
 /* --- Section Headers --- */
@@ -930,7 +968,7 @@ p {
 /* --- Editorial Benefits Section --- */
 .benefits-section {
   padding: 8rem 0;
-  background-color: var(--bg-primary);
+  background-color: transparent;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   position: relative;
   overflow: hidden;
@@ -946,7 +984,8 @@ p {
 
 @media(min-width: 992px) {
   .benefits-header {
-    grid-template-columns: 7.2fr 2.8fr; /* 72% left, 28% right */
+    grid-template-columns: 7.2fr 2.8fr;
+    /* 72% left, 28% right */
     gap: 4rem;
   }
 }
@@ -1016,8 +1055,13 @@ p {
 }
 
 @keyframes slow-rotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .benefits-grid {
@@ -1144,7 +1188,7 @@ p {
 /* --- Services/Capabilities Section --- */
 .services {
   padding: 8rem 0;
-  background-color: var(--bg-primary);
+  background-color: transparent;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   position: relative;
   overflow: hidden;
@@ -1178,11 +1222,11 @@ p {
     border-right: 1px solid rgba(255, 255, 255, 0.08);
     padding: 3rem 2.5rem;
   }
-  
+
   .capability-col:first-child {
     border-left: 1px solid rgba(255, 255, 255, 0.08);
   }
-  
+
   /* Staggered Vertical Stagger (Stairs concept) */
   .capability-col:nth-child(1) {
     padding-top: 4rem;
@@ -1221,9 +1265,11 @@ p {
   .capability-col:nth-child(1) .col-bg-num {
     top: 2rem;
   }
+
   .capability-col:nth-child(2) .col-bg-num {
     top: 13rem;
   }
+
   .capability-col:nth-child(3) .col-bg-num {
     top: 24rem;
   }
@@ -1315,7 +1361,8 @@ p {
   transition: var(--transition-fast);
 }
 
-.tab-btn:hover, .tab-btn.active {
+.tab-btn:hover,
+.tab-btn.active {
   background-color: var(--text-primary);
   color: var(--bg-primary);
   border-color: var(--text-primary);
@@ -1358,7 +1405,8 @@ p {
 .item-img-container {
   position: relative;
   width: 100%;
-  padding-top: 120%; /* 5:6 aspect ratio */
+  padding-top: 120%;
+  /* 5:6 aspect ratio */
   overflow: hidden;
   background-color: var(--bg-tertiary);
 }
@@ -1472,7 +1520,7 @@ p {
   font-family: var(--font-heading);
   font-size: 2.5rem;
   font-weight: 800;
-  background: linear-gradient(135deg, rgba(88,80,236,0.3), rgba(217,70,239,0.3));
+  background: linear-gradient(135deg, rgba(88, 80, 236, 0.3), rgba(217, 70, 239, 0.3));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: block;
@@ -1490,7 +1538,7 @@ p {
 
 .process-card:hover {
   border-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   transform: translateY(-5px);
 }
 
@@ -1776,10 +1824,10 @@ p {
 }
 
 /* Floating Label Effects */
-.form-group input:focus ~ label,
-.form-group input:not(:placeholder-shown) ~ label,
-.form-group textarea:focus ~ label,
-.form-group textarea:not(:placeholder-shown) ~ label {
+.form-group input:focus~label,
+.form-group input:not(:placeholder-shown)~label,
+.form-group textarea:focus~label,
+.form-group textarea:not(:placeholder-shown)~label {
   top: -12px;
   font-size: 0.75rem;
   color: var(--accent-magenta);
@@ -1796,12 +1844,12 @@ p {
   appearance: none;
 }
 
-.form-group select ~ .select-label {
+.form-group select~.select-label {
   top: 1rem;
 }
 
-.form-group select:focus ~ .select-label,
-.form-group select:valid ~ .select-label {
+.form-group select:focus~.select-label,
+.form-group select:valid~.select-label {
   top: -12px;
   font-size: 0.75rem;
   color: var(--accent-magenta);
@@ -1835,7 +1883,7 @@ p {
 
 /* --- Footer --- */
 .footer {
-  background-color: var(--bg-secondary);
+  background-color: transparent;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   padding: 6rem 0 3rem;
   position: relative;
@@ -1946,7 +1994,9 @@ p {
 }
 
 /* --- Reveal Animations (GSAP Targets) --- */
-.reveal-element, .reveal-card, .reveal-item {
+.reveal-element,
+.reveal-card,
+.reveal-item {
   opacity: 0;
   transform: translateY(30px);
 }
