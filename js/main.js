@@ -47,13 +47,11 @@ document.addEventListener('DOMContentLoaded', () => {
       ease: 'power3.out'
     });
     
-    // Reveal Hero Title
-    tl.fromTo('.hero-title', {
-      opacity: 0,
-      y: 30
-    }, {
+    // Reveal Hero Title Lines
+    tl.to('.line-reveal', {
       opacity: 1,
       y: 0,
+      stagger: 0.15,
       duration: 0.8,
       ease: 'power3.out'
     }, '-=0.5');
@@ -134,8 +132,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Toggle Hamburger
   hamburgerBtn.addEventListener('click', () => {
-    hamburgerBtn.classList.toggle('active');
+    const isOpen = hamburgerBtn.classList.toggle('active');
     navLinks.classList.toggle('mobile-active');
+    navbar.classList.toggle('mobile-menu-active');
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
   });
 
   // Close mobile menu when clicking a link
@@ -143,6 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
     link.addEventListener('click', () => {
       hamburgerBtn.classList.remove('active');
       navLinks.classList.remove('mobile-active');
+      navbar.classList.remove('mobile-menu-active');
+      document.body.style.overflow = '';
     });
   });
 
@@ -154,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   if (track && cards.length > 0) {
     let scrollOffset = 0;
-    let autoSpeed = 0.6; // Slow automatic scroll speed from right to left
+    let autoSpeed = 0.8; // Enable smooth automatic scrolling loop
     let isDragging = false;
     let startX = 0;
     let dragOffset = 0;
@@ -168,40 +174,22 @@ document.addEventListener('DOMContentLoaded', () => {
     let cardWidth, spacing, totalWidth, slant, centerY, wrapMargin;
     
     function updateParams() {
-      const width = window.innerWidth;
+      const isTablet = window.innerWidth < 992;
+      cardWidth = isTablet ? 170 : 290; // Slightly larger card width (was 150 : 270)
+      spacing = isTablet ? 125 : 205; // Balanced fanning overlap spacing (was 110 : 180)
+      totalWidth = spacing * cards.length;
+      slant = isTablet ? 0.08 : 0.14; // Gentler slanted slope for a subtle "small stairs" effect
+      
       const container = document.getElementById('sine-carousel');
-      const containerHeight = container ? container.clientHeight : window.innerHeight;
-
-      if (width < 576) {
-        // Mobile phones - smaller cards shifted higher to clear mobile hero text column
-        cardWidth = 90;
-        spacing = 65;
-        slant = 0.05;
-        centerY = containerHeight * 0.20;
-        wrapMargin = 150;
-        if (container) container.style.perspective = "400px";
-      } else if (width < 992) {
-        // Tablets - optimized card size and spacing
-        cardWidth = 130;
-        spacing = 90;
-        slant = 0.10;
-        centerY = containerHeight * 0.25;
-        wrapMargin = 200;
-        if (container) container.style.perspective = "600px";
+      if (container) {
+        centerY = container.clientHeight * 0.5;
+        container.style.perspective = isTablet ? "500px" : "1200px";
+        container.style.pointerEvents = 'auto';
       } else {
-        // Desktop / 2K / 4K layout matching creativecue.co spacing and centering
-        cardWidth = 290;
-        wrapMargin = 400;
-        spacing = Math.max(Math.ceil(0.08 * width), Math.ceil((width + 2 * wrapMargin) / cards.length));
-        slant = 0.30;
-        centerY = containerHeight * 0.50; // Use true center because the sine wave is centered at 0
-        if (container) container.style.perspective = "1200px";
+        centerY = window.innerHeight * 0.45;
       }
       
-      totalWidth = spacing * cards.length;
-      if (container) {
-        container.style.pointerEvents = 'auto';
-      }
+      wrapMargin = isTablet ? 200 : 400;
     }
     
     updateParams();
@@ -314,71 +302,53 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     function renderWave() {
-      const width = window.innerWidth;
+      const isTablet = window.innerWidth < 992;
       
+ 
       // Return smoothly to auto-scroll speed or pause on hover/release
       if (!isDragging) {
         let activeSpeed = (hoveredCardIndex !== null) ? 0 : autoSpeed;
-        targetSpeed += (activeSpeed - targetSpeed) * 0.04;
+        targetSpeed += (activeSpeed - targetSpeed) * 0.08;
         scrollOffset += targetSpeed;
       }
       
       cards.forEach((card, i) => {
         // Interpolate individual hover progress
         if (hoveredCardIndex === i) {
-          hoverProgress[i] += (1 - hoverProgress[i]) * 0.06;
+          hoverProgress[i] += (1 - hoverProgress[i]) * 0.1;
         } else {
-          hoverProgress[i] += (0 - hoverProgress[i]) * 0.08;
+          hoverProgress[i] += (0 - hoverProgress[i]) * 0.15;
         }
 
         // Horizontal loop positioning with safe wrap margin
         let x = ((i * spacing - scrollOffset) % totalWidth + totalWidth) % totalWidth - wrapMargin;
 
-        let finalScale, finalY, finalZ, finalOpacity, finalRotation, zIndex;
+        // Slanted vertical height displacement (diagonal layout)
+        let y = slant * (x - window.innerWidth * 0.5);
 
-        if (width >= 992) {
-          // Desktop / 2K / 4K layout matching creativecue.co exactly
-          let centerX = x + cardWidth * 0.5;
-          let dx = centerX - width * 0.56; // Shift wave center to the right to clear left text column
-          let s = width * 0.5;
-          let U = 0.6 * Math.PI;
-          
-          // Sine wave vertical position relative to center with 110px amplitude
-          let y_offset = 110 * Math.sin(dx / s * U) + 0.2 * dx;
-          
-          // Distance from center in index units
-          let l = Math.abs(dx) / spacing;
-          
-          // Scale down towards edges
-          finalScale = 0.4 + 0.4 * Math.exp(-0.8 * l);
-          
-          // Center card vertically
-          let cardHeight = card.classList.contains('landscape') ? 290 : 390;
-          finalY = centerY + y_offset - cardHeight / 2;
-          
-          // Stack center card on top of outer cards
-          zIndex = Math.round(100 - 10 * l);
-          
-          finalZ = 30 * hoverProgress[i];
-          finalRotation = 0;
-          finalOpacity = 0.95 + 0.05 * hoverProgress[i];
-        } else {
-          // Mobile & Tablet layout (original behavior)
-          let y = slant * (x - width * 0.5);
-          let cardHeight = (width < 576) ? (card.classList.contains('landscape') ? 120 : 165) 
-                                         : (card.classList.contains('landscape') ? 160 : 220);
-          finalY = centerY + y - cardHeight / 2;
-          finalScale = 1.0;
-          finalRotation = 0;
-          finalZ = 30 * hoverProgress[i];
-          finalOpacity = 0.95 + 0.05 * hoverProgress[i];
-          zIndex = Math.round(x);
-        }
+        // Base styling rules (flat 3D layout matching Creative Cue)
+        let baseScale = 1.0;
+        let baseOpacity = 0.95;
+        let baseZ = 0;
 
-        // Apply styles
+        // No rotation (cards are completely straight and upright)
+        let rotationDeg = 0;
+
+        // Center card vertically based on its responsive height
+        const cardHeight = card.classList.contains('landscape') ? (isTablet ? 170 : 290) : (isTablet ? 230 : 390);
+        let baseY = centerY + y - cardHeight / 2;
+
+        // Hover effect: straightens rotation slightly and lifts in Z depth, no scale zoom
+        let finalScale = baseScale;
+        let finalRotation = rotationDeg + (0 - rotationDeg) * hoverProgress[i];
+        let finalZ = baseZ + 30 * hoverProgress[i]; // Pop forward by 30px on hover
+        let finalY = baseY;
+        let finalOpacity = baseOpacity + (1 - baseOpacity) * hoverProgress[i];
+
         card.style.transform = `translate3d(${x}px, ${finalY}px, ${finalZ}px) rotateZ(${finalRotation}deg) scale(${finalScale})`;
         card.style.opacity = finalOpacity;
-        card.style.zIndex = zIndex + Math.round(hoverProgress[i] * 1000);
+        // Right-most cards overlap left-most cards, and hovered card comes to the absolute front (zIndex + 1000)
+        card.style.zIndex = Math.round(x) + Math.round(hoverProgress[i] * 1000);
       });
       
       requestAnimationFrame(renderWave);
@@ -577,7 +547,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  // --- Contact Form Submission Interaction ---
+  // --- Contact Form & EmailJS Integration ---
+  // Register at https://www.emailjs.com/ to get your credentials.
+  // Configure your EmailJS service to route incoming inquiries to: info4kalatmak@gmail.com
+  const EMAILJS_PUBLIC_KEY = 'ppVR-NH4Lan6M92l5'; 
+  const EMAILJS_SERVICE_ID = 'service_tn2620k'; 
+  const EMAILJS_TEMPLATE_ID = 'template_anznhij'; 
+
+  // Initialize EmailJS if key is provided and SDK is loaded
+  if (typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY && EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
+    emailjs.init({
+      publicKey: EMAILJS_PUBLIC_KEY,
+    });
+  }
+
   const contactForm = document.getElementById('contactForm');
   const formResponse = document.getElementById('formResponse');
   
@@ -593,27 +576,75 @@ document.addEventListener('DOMContentLoaded', () => {
         lucide.createIcons();
       }
       
-      // Simulate API submit delay
-      setTimeout(() => {
-        submitBtn.innerHTML = origText;
-        submitBtn.disabled = false;
-        if (typeof lucide !== 'undefined') {
-          lucide.createIcons();
-        }
-        
-        // Success Mock Response
-        formResponse.className = 'form-response success';
-        formResponse.innerHTML = '✨ Inquiry received! We will reach out to you within 24 hours.';
-        
-        // Reset form fields
-        contactForm.reset();
-        
-        // Clear message after 5 seconds
+      const isConfigured = typeof emailjs !== 'undefined' && 
+                           EMAILJS_PUBLIC_KEY && EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY' &&
+                           EMAILJS_SERVICE_ID && EMAILJS_SERVICE_ID !== 'YOUR_SERVICE_ID' &&
+                           EMAILJS_TEMPLATE_ID && EMAILJS_TEMPLATE_ID !== 'YOUR_TEMPLATE_ID';
+
+      if (!isConfigured) {
+        // Log setup guidance to console and fallback to simulation
+        console.warn(
+          'EmailJS Setup Required\n' +
+          'To route contact inquiries to info4kalatmak@gmail.com:\n' +
+          '1. Sign up at https://www.emailjs.com/\n' +
+          '2. Add an email service and connect it to your inbox.\n' +
+          '3. Create a template routing to info4kalatmak@gmail.com with fields: name, email, project-type, message.\n' +
+          '4. Set your keys (EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID) in js/main.js.\n' +
+          'Currently running in DEMO mode with simulated submission.'
+        );
+
         setTimeout(() => {
-          formResponse.innerHTML = '';
-          formResponse.className = 'form-response';
-        }, 5000);
-      }, 1500);
+          submitBtn.innerHTML = origText;
+          submitBtn.disabled = false;
+          if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+          }
+          
+          formResponse.className = 'form-response success';
+          formResponse.innerHTML = '✨ Inquiry received! (Demo Mode: EmailJS keys not configured)';
+          contactForm.reset();
+          
+          setTimeout(() => {
+            formResponse.innerHTML = '';
+            formResponse.className = 'form-response';
+          }, 5000);
+        }, 1500);
+      } else {
+        // Send email via EmailJS Browser SDK
+        emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, contactForm)
+          .then(() => {
+            submitBtn.innerHTML = origText;
+            submitBtn.disabled = false;
+            if (typeof lucide !== 'undefined') {
+              lucide.createIcons();
+            }
+            
+            formResponse.className = 'form-response success';
+            formResponse.innerHTML = '✨ Inquiry sent successfully! We will reach out to you within 24 hours.';
+            contactForm.reset();
+            
+            setTimeout(() => {
+              formResponse.innerHTML = '';
+              formResponse.className = 'form-response';
+            }, 5000);
+          })
+          .catch((error) => {
+            console.error('EmailJS Error:', error);
+            submitBtn.innerHTML = origText;
+            submitBtn.disabled = false;
+            if (typeof lucide !== 'undefined') {
+              lucide.createIcons();
+            }
+            
+            formResponse.className = 'form-response error';
+            formResponse.innerHTML = '❌ Failed to send inquiry. Please try again or email us directly at info4kalatmak@gmail.com';
+            
+            setTimeout(() => {
+              formResponse.innerHTML = '';
+              formResponse.className = 'form-response';
+            }, 8000);
+          });
+      }
     });
   }
 

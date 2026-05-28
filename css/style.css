@@ -41,8 +41,6 @@
   --grid-line-color: rgba(255, 255, 255, 0.03);
 }
 
-
-
 /* --- Base Resets & Global Styles --- */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -148,19 +146,16 @@ body.hovering-link .custom-cursor-circle {
 }
 
 .preloader-logo {
-  font-family: var(--font-heading);
-  font-size: 2.5rem;
-  font-weight: 800;
-  letter-spacing: -1px;
-  margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, #fff 30%, var(--text-secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.preloader-logo span {
-  color: var(--accent-magenta);
-  -webkit-text-fill-color: initial;
+.preloader-logo-img {
+  height: 50px;
+  width: auto;
+  display: block;
 }
 
 .preloader-bar {
@@ -316,7 +311,7 @@ p {
   left: 0;
   width: 100%;
   padding: 1.5rem 0;
-  z-index: 1050; /* Above all content including transformed cards and layout sections */
+  z-index: 1002; /* Ensure navbar sits above fullscreen mobile overlays */
   transition: var(--transition-normal);
 }
 
@@ -325,6 +320,14 @@ p {
   background-color: rgba(9, 9, 11, 0.7);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Make navbar transparent when mobile menu overlay is active */
+.navbar.mobile-menu-active {
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom: none !important;
 }
 
 .navbar-container {
@@ -343,15 +346,26 @@ p {
   text-decoration: none;
   color: var(--text-primary);
   letter-spacing: -0.5px;
-  white-space: nowrap;
-  display: inline-flex;
-  align-items: center;
   position: relative;
-  z-index: 1001; /* Renders above mobile overlay menu */
+  z-index: 1005; /* Keep logo floating on top of mobile menu */
+  display: flex;
+  align-items: center;
 }
 
 .logo-accent {
   color: var(--accent-magenta);
+}
+
+.logo-img {
+  height: 35px;
+  width: auto;
+  display: block;
+}
+
+@media(max-width: 991px) {
+  .logo-img {
+    height: 26px;
+  }
 }
 
 .nav-links {
@@ -398,6 +412,8 @@ p {
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  position: relative;
+  z-index: 1005; /* Keep actions / close button floating on top of mobile menu */
 }
 
 .nav-actions {
@@ -427,7 +443,13 @@ p {
   background: transparent;
   border: none;
   cursor: pointer;
-  z-index: 1001;
+  z-index: 1006;
+}
+
+@media(max-width: 991px) {
+  .logo {
+    font-size: 1.25rem; /* Decrease logo scale on mobile to avoid overcrowding */
+  }
 }
 
 @media(min-width: 992px) {
@@ -452,69 +474,75 @@ p {
   transform: translateY(-8px) rotate(-45deg);
 }
 
-/* Mobile Menu Panel */
+/* Mobile Menu Panel Overlay */
 .nav-links.mobile-active {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: var(--bg-primary);
+  inset: 0;
+  background-color: rgba(9, 9, 11, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   z-index: 1000;
-  gap: 2.2rem;
+  gap: 2.5rem;
+  font-size: 1.8rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
 }
 
 .nav-links.mobile-active .nav-link {
-  font-size: 1.8rem;
-  font-weight: 500;
   color: var(--text-primary);
-  letter-spacing: -0.5px;
-  padding: 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color var(--transition-normal), transform var(--transition-normal);
 }
 
 .nav-links.mobile-active .nav-link:hover {
   color: var(--accent-magenta);
+  transform: scale(1.05);
+}
+
+.hamburger.active {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 1001;
+}
+
+.nav-mobile-only {
+  display: none !important;
+}
+
+@media(max-width: 991px) {
+  .nav-links.mobile-active .nav-mobile-only {
+    display: block !important;
+  }
 }
 
 /* --- Hero Section --- */
 .hero {
   position: relative;
-  min-height: calc(100vh - 120px);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-start;
-  padding-bottom: 6rem;
-  padding-top: 3rem;
+  height: 100vh;
+  min-height: 800px;
   overflow: hidden;
   z-index: 5;
-  margin-top: 120px; /* Use margin-top instead of top to prevent visual overlap on following sections */
-  top: 0;
-}
-
-@media (min-width: 992px) {
-  .hero {
-    margin-top: 150px;
-    top: 0;
-    min-height: calc(100vh - 150px);
-    padding-bottom: 7rem;
-  }
+  margin: 0;
+  padding: 0;
 }
 
 .hero-carousel-container {
   position: absolute;
-  top: 0;
+  top: 100px; /* clear floating navbar spacing */
   left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  z-index: 1;
+  width: 100vw;
+  height: 600px;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  z-index: 10;
+  overflow: visible; /* let diagonal slant cards cascade smoothly */
   pointer-events: auto;
-  margin: 0;
 }
 
 .sine-track {
@@ -533,7 +561,6 @@ p {
   height: 390px; /* Increased card height on desktop */
   border-radius: 0; /* Removed border-radius for sharp-cornered style */
   overflow: hidden;
-  /* background-color: var(--bg-secondary); */
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   transform-origin: center center;
@@ -543,8 +570,8 @@ p {
 }
 
 .sine-card.landscape {
-  width: 390px; /* Increased card width on desktop */
-  height: 290px; /* Increased card height on desktop */
+  width: 390px;
+  height: 290px;
 }
 
 .sine-card img {
@@ -559,29 +586,16 @@ p {
   cursor: pointer;
 }
 
-@media(max-width: 575px) {
+@media(max-width: 991px) {
   .sine-card {
-    width: 90px;
-    height: 125px;
+    width: 170px;
+    height: 230px;
   }
   .sine-card.landscape {
-    width: 125px;
-    height: 90px;
+    width: 230px;
+    height: 170px;
   }
 }
-
-@media(min-width: 576px) and (max-width: 991px) {
-  .sine-card {
-    width: 130px;
-    height: 180px;
-  }
-  .sine-card.landscape {
-    width: 180px;
-    height: 130px;
-  }
-}
-
-
 
 .hero-grid-overlay {
   position: absolute;
@@ -619,61 +633,42 @@ p {
 }
 
 .hero-content {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
   width: 90%;
   max-width: var(--container-max-width);
-  margin: 0 auto;
-  position: relative;
-  z-index: 4000; /* Ensure text renders above the scrolling background cards */
-  transform: translate3d(0, 0, 100px); /* Push text in front of 3D carousel cards in hardware composition */
-  order: 2;
-  display: block; /* Removed grid for clean left aligned column */
+  z-index: 20;
   pointer-events: none;
 }
 
 .hero-content-left {
+  width: 42%;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  text-align: left;
-  pointer-events: none;
-  max-width: 620px; /* Restrict width of the text column */
-}
-
-.hero-content-left a {
+  gap: 1.25rem;
   pointer-events: auto;
 }
 
 .hero-content-right {
-  display: none;
-}
-
-@media (max-width: 991px) {
-  .hero {
-    padding-top: 2rem;
-    padding-bottom: 4rem;
-    min-height: calc(100vh - 120px);
-  }
-  
-  .hero-content {
-    width: 100%;
-    padding-left: 24px;
-    padding-right: 24px;
-  }
+  display: none !important; /* Hide particle orb container per reference design mix */
 }
 
 .hero-status {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 0.5rem 1rem;
-  border-radius: 100px;
-  margin-bottom: 2rem;
-  font-size: 0.8rem;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  text-transform: none;
 }
 
 .status-dot {
@@ -692,68 +687,86 @@ p {
 }
 
 .hero-title {
-  font-family: var(--font-body); /* Outfit font to match Creative Cue exactly */
-  font-size: 2rem;
-  line-height: 1.15;
-  letter-spacing: -1.2px;
-  margin-bottom: 1.5rem;
-  max-width: 600px;
-  font-weight: 400; /* Medium weight */
-  color: var(--text-primary);
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6); /* Guarantee readability on overlapping vibrant card backdrops */
-}
-
-@media(max-width: 375px) {
-  .hero-title {
-    font-size: 1.75rem;
-    letter-spacing: -0.8px;
-    margin-bottom: 1rem;
-  }
-  .hero-description {
-    font-size: 0.9rem;
-    margin-bottom: 1.5rem;
-  }
+  font-family: var(--font-body); /* Outfit, sans-serif */
+  font-weight: 300; /* Clean light/medium weight humanist sans-serif */
+  font-size: 2.25rem;
+  line-height: 1.25;
+  letter-spacing: -0.5px;
+  margin-bottom: 1rem;
+  width: 100%;
 }
 
 @media(min-width: 768px) {
   .hero-title {
-    font-size: 2.8rem; /* Scaled matching reference and typography constraints */
+    font-size: 2.6rem;
   }
 }
 
 .hero-description {
-  font-size: 14px;
+  font-size: 0.95rem;
   color: var(--text-secondary);
-  max-width: 480px;
-  margin-bottom: 2rem;
-  line-height: 1.6;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Pop text out against cards */
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
 }
-
-
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
+  gap: 1.25rem;
 }
 
-.hero-cta-link {
+.hero-link {
   font-family: var(--font-body);
   font-size: 1.05rem;
   color: var(--text-primary);
   text-decoration: none;
-  border-bottom: 1.5px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
   padding-bottom: 0.5rem;
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
+  font-weight: 500;
   transition: border-color var(--transition-normal);
-  pointer-events: auto;
-  margin-top: 0.5rem;
 }
 
-.hero-cta-link:hover {
+.hero-link:hover {
   border-color: var(--text-primary);
+}
+
+@media (max-width: 991px) {
+  .hero {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: auto;
+    padding-top: 7rem;
+    padding-bottom: 4rem;
+  }
+  
+  .hero-carousel-container {
+    position: relative;
+    top: 0;
+    height: 340px;
+    margin-bottom: 2.5rem;
+    width: 100vw;
+  }
+  
+  .hero-content {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    transform: none;
+    width: 100%;
+    max-width: none;
+    padding-left: 24px;
+    padding-right: 24px;
+    gap: 1.5rem;
+    pointer-events: auto;
+  }
+  
+  .hero-title {
+    font-size: 2.2rem;
+  }
 }
 
 /* --- Brand Grid Section --- */
@@ -1846,6 +1859,10 @@ p {
   font-size: 1.75rem;
 }
 
+.footer-brand .logo-img {
+  height: 42px;
+}
+
 .footer-tag {
   margin-top: 0.5rem;
   font-size: 0.9rem;
@@ -2035,5 +2052,3 @@ p {
     height: 40px;
   }
 }
-
-

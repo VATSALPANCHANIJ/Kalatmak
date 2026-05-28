@@ -19,13 +19,16 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- EmailJS Browser SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
   <!-- GSAP & Three.js CDNs -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   
   <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=4.2">
+  <link rel="stylesheet" href="css/style.css?v=3.6">
 </head>
 <body>
 
@@ -36,7 +39,7 @@
   <!-- Preloader Screen -->
   <div class="preloader" id="preloader">
     <div class="preloader-content">
-      <div class="preloader-logo">KALATMAK<span>®</span></div>
+      <div class="preloader-logo"><img src="images/logo.png" alt="KALATMAK®" class="preloader-logo-img"></div>
       <div class="preloader-bar">
         <div class="preloader-progress" id="preloaderProgress"></div>
       </div>
@@ -53,13 +56,14 @@
   <!-- Floating Navigation Header -->
   <header class="navbar" id="navbar">
     <div class="navbar-container">
-      <a href="#" class="logo"><span class="serif-initial" style="font-size: 1.1em; margin-right: -0.15em;">K</span>ALATMAK<span class="logo-accent">®</span></a>
+      <a href="#" class="logo"><img src="images/logo.png" alt="KALATMAK®" class="logo-img"></a>
       <nav class="nav-links" id="navLinks">
         <a href="#about" class="nav-link">About</a>
         <a href="#services" class="nav-link">Services</a>
         <a href="#work" class="nav-link">Work</a>
         <a href="#process" class="nav-link">Process</a>
         <a href="#pricing" class="nav-link">Pricing</a>
+        <a href="#contact" class="nav-link nav-mobile-only">Get in Touch</a>
       </nav>
       <div class="nav-right">
         <div class="nav-actions">
@@ -110,27 +114,28 @@
         
         <div class="hero-content">
           <div class="hero-content-left">
-            <div class="hero-status animate-fade-in">
+            <!-- <div class="hero-status animate-fade-in">
               <span class="status-dot"></span>
-              <span class="status-text">Currently Open</span>
-            </div>
+              <span class="status-text">Now Booking Projects for Q3/Q4</span>
+            </div> -->
             
             <h1 class="hero-title">
-              <span class="serif-initial">P</span>remium design expertise backed by bandwidth that doesn't break.
+              <span class="line-reveal"><span class="serif-initial">E</span>xquisite Graphic Design.</span><br>
+              <span class="line-reveal text-gradient"><span class="serif-initial">B</span>oundless Creativity.</span>
             </h1>
             
             <p class="hero-description animate-fade-in-delayed">
-              Your dedicated design team for brand, web, email, and everything that touches design. One flat fee, unlimited requests, managed through Slack and Notion. No hiring. No freelancer roulette.
+              We build state-of-the-art visual assets—Posters, Banners, Social Media campaigns, and Brochures—tailored to elevate your brand from standard to premium.
             </p>
             
-            <div class="hero-actions animate-fade-in-delayed">
-              <a href="#contact" class="hero-cta-link">
-                Book A Call
+            <!-- <div class="hero-actions animate-fade-in-delayed">
+              <a href="#work" class="hero-link">
+                Explore Work
                 <svg class="dotted-spinner" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
                   <circle cx="8" cy="8" r="6" stroke-dasharray="2 3" />
                 </svg>
               </a>
-            </div>
+            </div> -->
           </div>
         </div>
       </section>
@@ -705,7 +710,7 @@
             <div class="portfolio-item reveal-item" data-category="poster">
               <div class="item-inner">
                 <div class="item-img-container">
-                  <img src="images/cyberpunk_poster.png" alt="Cyberpunk Poster Design" class="portfolio-img">
+                  <img src="images/cyberpunk_poster.png" alt="Cyberpunk Poster Design" class="portfolio-img" loading="lazy">
                   <div class="item-overlay">
                     <span class="item-tag">Poster Design</span>
                   </div>
@@ -721,7 +726,7 @@
             <div class="portfolio-item reveal-item" data-category="banner">
               <div class="item-inner">
                 <div class="item-img-container">
-                  <img src="images/tech_banner.png" alt="Tech Conference Banner" class="portfolio-img">
+                  <img src="images/tech_banner.png" alt="Tech Conference Banner" class="portfolio-img" loading="lazy">
                   <div class="item-overlay">
                     <span class="item-tag">Banner Design</span>
                   </div>
@@ -737,7 +742,7 @@
             <div class="portfolio-item reveal-item" data-category="social">
               <div class="item-inner">
                 <div class="item-img-container">
-                  <img src="images/social_post.png" alt="Social Media Branding" class="portfolio-img">
+                  <img src="images/social_post.png" alt="Social Media Branding" class="portfolio-img" loading="lazy">
                   <div class="item-overlay">
                     <span class="item-tag">Social Media</span>
                   </div>
@@ -753,7 +758,7 @@
             <div class="portfolio-item reveal-item" data-category="brochure">
               <div class="item-inner">
                 <div class="item-img-container">
-                  <img src="images/minimal_brochure.png" alt="Minimalist Brochure" class="portfolio-img">
+                  <img src="images/minimal_brochure.png" alt="Minimalist Brochure" class="portfolio-img" loading="lazy">
                   <div class="item-overlay">
                     <span class="item-tag">Brochure</span>
                   </div>
@@ -769,7 +774,7 @@
             <div class="portfolio-item reveal-item" data-category="banner">
               <div class="item-inner">
                 <div class="item-img-container">
-                  <img src="images/fitness_banner.png" alt="Fitness Banner" class="portfolio-img">
+                  <img src="images/fitness_banner.png" alt="Fitness Banner" class="portfolio-img" loading="lazy">
                   <div class="item-overlay">
                     <span class="item-tag">Banner Design</span>
                   </div>
@@ -785,7 +790,7 @@
             <div class="portfolio-item reveal-item" data-category="social">
               <div class="item-inner">
                 <div class="item-img-container">
-                  <img src="images/brand_identity.png" alt="Corporate Branding stationery" class="portfolio-img">
+                  <img src="images/brand_identity.png" alt="Corporate Branding stationery" class="portfolio-img" loading="lazy">
                   <div class="item-overlay">
                     <span class="item-tag">Brand Identity</span>
                   </div>
@@ -942,14 +947,21 @@
                 <i data-lucide="mail"></i>
                 <div>
                   <h4>Email Us</h4>
-                  <a href="mailto:hello@kalatmak.studio" class="hover-glow">hello@kalatmak.studio</a>
+                  <a href="mailto:info4kalatmak@gmail.com" class="hover-glow">info4kalatmak@gmail.com</a>
+                </div>
+              </div>
+              <div class="contact-info-item">
+                <i data-lucide="phone"></i>
+                <div>
+                  <h4>Call Us</h4>
+                  <a href="tel:+918980081500" class="hover-glow">+91 89800 81500</a>
                 </div>
               </div>
               <div class="contact-info-item">
                 <i data-lucide="map-pin"></i>
                 <div>
                   <h4>Location</h4>
-                  <span>New Delhi, India (Serving Globally)</span>
+                  <span>Mysore Road, Bangalore</span>
                 </div>
               </div>
             </div>
@@ -959,29 +971,29 @@
             <form class="contact-form" id="contactForm">
               <div class="form-row">
                 <div class="form-group">
-                  <input type="text" id="name" required placeholder=" ">
+                  <input type="text" id="name" name="name" required placeholder=" ">
                   <label for="name">Your Name</label>
                 </div>
                 <div class="form-group">
-                  <input type="email" id="email" required placeholder=" ">
+                  <input type="email" id="email" name="email" required placeholder=" ">
                   <label for="email">Email Address</label>
                 </div>
               </div>
               
               <div class="form-group">
-                <select id="project-type" required>
+                <select id="project-type" name="project-type" required>
                   <option value="" disabled selected hidden></option>
-                  <option value="poster">Poster Design</option>
-                  <option value="banner">Advertising Banner</option>
-                  <option value="social">Social Media Package</option>
-                  <option value="brochure">Brochure/Catalog Design</option>
-                  <option value="branding">Complete Identity Plan</option>
+                  <option value="Poster Design">Poster Design</option>
+                  <option value="Advertising Banner">Advertising Banner</option>
+                  <option value="Social Media Package">Social Media Package</option>
+                  <option value="Brochure/Catalog Design">Brochure/Catalog Design</option>
+                  <option value="Complete Identity Plan">Complete Identity Plan</option>
                 </select>
                 <label for="project-type" class="select-label">What do you need designed?</label>
               </div>
 
               <div class="form-group">
-                <textarea id="message" rows="5" required placeholder=" "></textarea>
+                <textarea id="message" name="message" rows="5" required placeholder=" "></textarea>
                 <label for="message">Tell us about your project brief...</label>
               </div>
 
@@ -1000,7 +1012,7 @@
         <div class="container">
           <div class="footer-top">
             <div class="footer-brand">
-              <a href="#" class="logo"><span class="serif-initial" style="font-size: 1.15em; margin-right: -0.15em;">K</span>ALATMAK<span>®</span></a>
+              <a href="#" class="logo"><img src="images/logo.png" alt="KALATMAK®" class="logo-img" loading="lazy"></a>
               <p class="footer-tag">Modern Graphic Aesthetics & 3D Creations</p>
             </div>
             <div class="footer-links-grid">
@@ -1048,6 +1060,6 @@
   </div>
 
   <!-- Custom Script -->
-  <script src="js/main.js?v=4.2"></script>
+  <script src="js/main.js?v=3.6"></script>
 </body>
 </html>
